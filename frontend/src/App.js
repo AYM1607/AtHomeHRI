@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { ChakraProvider, Container, Heading } from "@chakra-ui/react";
 import socketIOClient from "socket.io-client";
+
 const ENDPOINT = "http://127.0.0.1:5000";
 
 const socket = socketIOClient(ENDPOINT);
@@ -15,10 +17,12 @@ function App() {
   }, []);
 
   return (
-    <div>
-      <h1>Websocket test</h1>
-      {image && <img src={`data:image/jpg;base64,${image}`} />}
-    </div>
+    <ChakraProvider>
+      <Container textAlign="center">
+        <Heading mb={10}>@HOME HRI</Heading>
+        {image && <img src={`data:image/jpg;base64,${image}`} />}
+      </Container>
+    </ChakraProvider>
   );
 }
 
