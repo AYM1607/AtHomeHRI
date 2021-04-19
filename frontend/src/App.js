@@ -1,27 +1,84 @@
-import React, { useState, useEffect } from "react";
-import { ChakraProvider, Container, Heading } from "@chakra-ui/react";
-import socketIOClient from "socket.io-client";
+import React, { useState } from "react";
+import {
+  Button,
+  ChakraProvider,
+  Checkbox,
+  Drawer,
+  DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  IconButton,
+  Stack,
+  useDisclosure,
+  Wrap,
+  WrapItem,
+} from "@chakra-ui/react";
+import { HamburgerIcon } from "@chakra-ui/icons";
 
-const ENDPOINT = "http://127.0.0.1:5000";
-
-const socket = socketIOClient(ENDPOINT);
+import CameraFeed from "./components/CameraFeed";
+import DummyModule from "./components/DummyModule";
 
 function App() {
-  const [image, setImage] = useState(null);
-
-  useEffect(() => {
-    socket.on("CameraFeed", setImage);
-
-    socket.on("Comm", console.log);
-    return () => socket.disconnect();
-  }, []);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isCameraFeedActive, setIsCameraFeedActive] = useState(false);
+  const [isDummyModuleActive, setIsDummyModuleActive] = useState(false);
 
   return (
     <ChakraProvider>
-      <Container textAlign="center">
-        <Heading mb={10}>@HOME HRI</Heading>
-        {image && <img src={`data:image/jpg;base64,${image}`} />}
-      </Container>
+      {/* Modules options drawer */}
+      <Drawer placement="left" isOpen={isOpen} onClose={onClose}>
+        <DrawerOverlay>
+          <DrawerContent>
+            <DrawerCloseButton />
+            <DrawerHeader>Modulos activos</DrawerHeader>
+            <DrawerBody>
+              <Stack direction="column">
+                <Checkbox
+                  isChecked={isCameraFeedActive}
+                  onChange={(e) => setIsCameraFeedActive(e.target.checked)}
+                  size="lg"
+                >
+                  Camera feed
+                </Checkbox>
+                <Checkbox
+                  isChecked={isDummyModuleActive}
+                  onChange={(e) => setIsDummyModuleActive(e.target.checked)}
+                  size="lg"
+                >
+                  Dummy module
+                </Checkbox>
+              </Stack>
+            </DrawerBody>
+            <DrawerFooter>
+              <Button colorScheme="pink">Enter competition mode</Button>
+            </DrawerFooter>
+          </DrawerContent>
+        </DrawerOverlay>
+      </Drawer>
+      {/* Modules options button */}
+      <IconButton
+        pos="fixed"
+        left="10"
+        bottom="10"
+        size="lg"
+        icon={<HamburgerIcon />}
+        onClick={onOpen}
+      />
+      <Wrap p="6">
+        {isCameraFeedActive && (
+          <WrapItem>
+            <CameraFeed />
+          </WrapItem>
+        )}
+        {isDummyModuleActive && (
+          <WrapItem>
+            <DummyModule />
+          </WrapItem>
+        )}
+      </Wrap>
     </ChakraProvider>
   );
 }
