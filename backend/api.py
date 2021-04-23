@@ -28,7 +28,10 @@ def message_sender():
         _, img_buffer = cv2.imencode(".jpg", img)
         img_text = base64.b64encode(img_buffer)
         socketio.emit("CameraFeed", img_text.decode("ascii"))
-        socketio.sleep(0.1)
+        socketio.emit(
+            "Comm", f"The robot has informed that its current time is {time.time()}"
+        )
+        socketio.sleep(0.05)
 
 
 @socketio.on("connect")
