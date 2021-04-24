@@ -11,7 +11,7 @@ export default function CameraFeed() {
   }, []);
 
   return (
-    <Box shadow="lg" p="4" borderRadius="lg" maxW="50%">
+    <Box shadow="lg" p="4" borderRadius="lg" maxW="600px">
       <Text fontSize="2xl" mb="4">
         Camera feed
       </Text>

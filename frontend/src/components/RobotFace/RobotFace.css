@@ -9,7 +9,6 @@
 
 .face {
   background-color: var(--face-color);
-  /*margin: auto;*/
   height: var(--face-height);
   width: var(--face-width);
   position: relative;
