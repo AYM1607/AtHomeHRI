@@ -20,11 +20,13 @@ import { HamburgerIcon } from "@chakra-ui/icons";
 
 import CameraFeed from "./components/CameraFeed";
 import DummyModule from "./components/DummyModule";
+import RobotFace from "./components/RobotFace/RobotFace"
 
 function App() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isCameraFeedActive, setIsCameraFeedActive] = useState(false);
   const [isDummyModuleActive, setIsDummyModuleActive] = useState(false);
+  const [isRobotFaceActive, setIsRobotFaceActive] = useState(false);
 
   return (
     <ChakraProvider>
@@ -50,6 +52,13 @@ function App() {
                 >
                   Dummy module
                 </Checkbox>
+                <Checkbox
+                  isChecked={isRobotFaceActive}
+                  onChange={(e) => setIsRobotFaceActive(e.target.checked)}
+                  size="lg"
+                >
+                  Robot Face
+                </Checkbox>
               </Stack>
             </DrawerBody>
             <DrawerFooter>
@@ -68,6 +77,11 @@ function App() {
         onClick={onOpen}
       />
       <Wrap p="6">
+        {isRobotFaceActive && (
+          <WrapItem>
+            <RobotFace />
+          </WrapItem>
+        )}
         {isCameraFeedActive && (
           <WrapItem>
             <CameraFeed />
