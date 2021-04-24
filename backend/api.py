@@ -79,5 +79,5 @@ def root():
 
 if __name__ == "__main__":
     socketio.start_background_task(message_sender)
-    # socketio.start_background_task(chat_sender)
+    socketio.start_background_task(chat_sender)
     socketio.run(app)
