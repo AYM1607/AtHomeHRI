@@ -1,5 +1,6 @@
 import time
 import base64
+import uuid
 
 import flask
 import eventlet
@@ -21,7 +22,6 @@ cam = cv2.VideoCapture(0)
 # Sockets
 socketio = SocketIO(app, cors_allowed_origins="*")
 
-
 def message_sender():
     while True:
         _, img = cam.read()
@@ -32,6 +32,22 @@ def message_sender():
             "Comm", f"The robot has informed that its current time is {time.time()}"
         )
         socketio.sleep(0.05)
+
+
+def chat_sender():
+    while True:
+        robotMessage = {
+            "text": "Hello there, this is a test message.",
+            "id": str(uuid.uuid4()),
+            "sender": {
+              "name": "Robot",
+              "uid": "robot",
+              "avatar": "https://cdn.iconscout.com/icon/premium/png-256-thumb/robot-2459178-2139023.png"
+            }
+        }
+        socketio.emit("RobotMessage", robotMessage)
+        socketio.sleep(30)
+
 
 
 @socketio.on("connect")
@@ -63,4 +79,5 @@ def root():
 
 if __name__ == "__main__":
     socketio.start_background_task(message_sender)
+    socketio.start_background_task(chat_sender)
     socketio.run(app)
