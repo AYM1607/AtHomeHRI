@@ -34,6 +34,23 @@ def message_sender():
         socketio.sleep(0.05)
 
 
+def emotion_sender():
+    emotions = [
+        "start",
+        "happy",
+        "sad",
+        "angry",
+        "focused",
+        "confused",
+        "stop"
+    ]
+    while True:
+        for emotion in emotions:
+            print(emotion)
+            socketio.emit("RobotFace", emotion)
+            socketio.sleep(5)
+
+
 def chat_sender():
     while True:
         robotMessage = {
@@ -47,7 +64,6 @@ def chat_sender():
         }
         socketio.emit("RobotMessage", robotMessage)
         socketio.sleep(30)
-
 
 
 @socketio.on("connect")
@@ -79,5 +95,6 @@ def root():
 
 if __name__ == "__main__":
     socketio.start_background_task(message_sender)
+    socketio.start_background_task(emotion_sender)
     socketio.start_background_task(chat_sender)
     socketio.run(app)
