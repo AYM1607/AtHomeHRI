@@ -16,17 +16,15 @@ import {
   Wrap,
   WrapItem,
 } from "@chakra-ui/react";
-import { HamburgerIcon } from "@chakra-ui/icons";
+import { HamburgerIcon, WarningTwoIcon } from "@chakra-ui/icons";
 
 import CameraFeed from "./components/CameraFeed";
-import DummyModule from "./components/DummyModule";
 import RobotFace from "./components/RobotFace/RobotFace";
 import RobotChat from "./components/RobotChat";
 
 function App() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isCameraFeedActive, setIsCameraFeedActive] = useState(false);
-  const [isDummyModuleActive, setIsDummyModuleActive] = useState(false);
   const [isRobotFaceActive, setIsRobotFaceActive] = useState(false);
   const [isRobotChatActive, setIsRobotChatActive] = useState(false);
 
@@ -46,13 +44,6 @@ function App() {
                   size="lg"
                 >
                   Camera feed
-                </Checkbox>
-                <Checkbox
-                  isChecked={isDummyModuleActive}
-                  onChange={(e) => setIsDummyModuleActive(e.target.checked)}
-                  size="lg"
-                >
-                  Dummy module
                 </Checkbox>
                 <Checkbox
                   isChecked={isRobotFaceActive}
@@ -86,6 +77,15 @@ function App() {
         onClick={onOpen}
         style={{ zIndex: 200 }}
       />
+      <IconButton
+        pos="fixed"
+        right="10"
+        bottom="100"
+        size="lg"
+        colorScheme="red"
+        icon={<WarningTwoIcon />}
+        style={{ zIndex: 200 }}
+      />
       <Wrap p="6">
         {isRobotFaceActive && (
           <WrapItem>
@@ -95,11 +95,6 @@ function App() {
         {isCameraFeedActive && (
           <WrapItem>
             <CameraFeed />
-          </WrapItem>
-        )}
-        {isDummyModuleActive && (
-          <WrapItem>
-            <DummyModule />
           </WrapItem>
         )}
         {isRobotChatActive && (
