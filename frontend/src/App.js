@@ -20,8 +20,8 @@ import { HamburgerIcon } from "@chakra-ui/icons";
 
 import CameraFeed from "./components/CameraFeed";
 import DummyModule from "./components/DummyModule";
-import RobotFace from "./components/RobotFace/RobotFace"
-import RobotChat from "./components/RobotChat"
+import RobotFace from "./components/RobotFace/RobotFace";
+import RobotChat from "./components/RobotChat";
 
 function App() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -79,11 +79,12 @@ function App() {
       {/* Modules options button */}
       <IconButton
         pos="fixed"
-        left="10"
+        right="10"
         bottom="10"
         size="lg"
         icon={<HamburgerIcon />}
         onClick={onOpen}
+        style={{ zIndex: 200 }}
       />
       <Wrap p="6">
         {isRobotFaceActive && (
