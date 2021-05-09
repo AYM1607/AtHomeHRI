@@ -4,6 +4,7 @@ import { ModuleIdentifier } from "./enums";
 import CameraFeed from "../components/CameraFeed";
 import RobotChat from "../components/RobotChat";
 import RobotFace from "../components/RobotFace/RobotFace";
+import SystemHealthModule from "../components/SystemHealthModule";
 
 export function mapModuleIdToComponent(moduleId) {
   switch (moduleId) {
@@ -15,7 +16,7 @@ export function mapModuleIdToComponent(moduleId) {
       return <RobotFace />;
     case ModuleIdentifier.SYSTEM_HEALTH:
       // TODO: implement system health.
-      return <div />;
+      return <SystemHealthModule />;
     default:
       // Return an empty div if the value is not recognized.
       return <div />;
