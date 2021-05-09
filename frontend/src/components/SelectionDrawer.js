@@ -16,7 +16,7 @@ import { useActiveModules } from "../hooks/useActiveModules";
 import { mapModuleIdToName } from "../lib/util";
 
 export default function SelectionDrawer({ isOpen, onClose }) {
-  const { activeModules, toggleModuleState } = useActiveModules();
+  const { activeModulesState, toggleModuleState } = useActiveModules();
 
   return (
     <Drawer placement="left" isOpen={isOpen} onClose={onClose}>
@@ -26,10 +26,10 @@ export default function SelectionDrawer({ isOpen, onClose }) {
           <DrawerHeader>Modulos activos</DrawerHeader>
           <DrawerBody>
             <Stack direction="column">
-              {Object.keys(activeModules).map((moduleId) => (
+              {Object.keys(activeModulesState).map((moduleId) => (
                 <Checkbox
                   key={moduleId}
-                  isChecked={activeModules[moduleId]}
+                  isChecked={activeModulesState[moduleId]}
                   onChange={(_) => toggleModuleState(moduleId)}
                   size="lg"
                 >

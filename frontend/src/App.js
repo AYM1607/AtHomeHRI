@@ -13,7 +13,7 @@ import { useActiveModules } from "./hooks/useActiveModules";
 import { mapModuleIdToComponent } from "./lib/util";
 
 function App() {
-  const { activeModules } = useActiveModules();
+  const { activeModulesState } = useActiveModules();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -40,8 +40,8 @@ function App() {
         style={{ zIndex: 200 }}
       />
       <Wrap p="6">
-        {Object.keys(activeModules)
-          .filter((moduleId) => activeModules[moduleId])
+        {Object.keys(activeModulesState)
+          .filter((moduleId) => activeModulesState[moduleId])
           .map((moduleId) => (
             <WrapItem key={moduleId}>
               {mapModuleIdToComponent(moduleId)}

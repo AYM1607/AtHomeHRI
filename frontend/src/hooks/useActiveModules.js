@@ -30,15 +30,15 @@ function toggleModuleState(moduleIdentifier) {
 
 export const useActiveModules = () => {
   // default to the current state to avoid having null periods.
-  const [activeModules, setActiveModules] = useState(state);
+  const [activeModulesState, setActiveModulesState] = useState(state);
 
   useEffect(() => {
-    const subscription = activeModulesSubject.subscribe(setActiveModules);
+    const subscription = activeModulesSubject.subscribe(setActiveModulesState);
     // Unsubscribe when component is unmounted.
     return () => {
       subscription.unsubscribe();
     };
   }, []);
 
-  return { activeModules, toggleModuleState };
+  return { activeModulesState, toggleModuleState };
 };
