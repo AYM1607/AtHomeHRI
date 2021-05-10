@@ -3,18 +3,12 @@ import { BehaviorSubject } from "rxjs";
 
 import { ModuleIdentifier } from "../lib/enums";
 
-const generateInitialState = () => {
-  let initialState = {};
-
-  // Initialize all modules to be inactive.
-  Object.keys(ModuleIdentifier).map((key) => {
-    // We don't want to use the keys but the values since that's
-    // what will be passed by the calling modules.
-    const moduleIdentifier = ModuleIdentifier[key];
-    initialState[moduleIdentifier] = false;
-  });
-  return initialState;
-};
+const generateInitialState = () =>
+  Object.values(ModuleIdentifier).reduce((acum, moduleId) => {
+    // Initialize all modules to be inactive.
+    acum[moduleId] = false;
+    return acum;
+  }, {});
 
 let state = generateInitialState();
 
