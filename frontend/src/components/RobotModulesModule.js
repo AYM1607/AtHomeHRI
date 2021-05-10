@@ -32,7 +32,7 @@ export default function RobotModulesModule() {
         {Object.values(RobotModule).map((robotModule) => {
           const active = activeRobotModulesMap[robotModule];
           return (
-            <Box color={active ? "green" : "gray"}>
+            <Box key={robotModule} color={active ? "green" : "gray"}>
               {active ? (
                 <Icon as={FaCheckCircle} />
               ) : (
@@ -46,4 +46,3 @@ export default function RobotModulesModule() {
     </Box>
   );
 }
-
