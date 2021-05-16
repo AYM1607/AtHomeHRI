@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   ChakraProvider,
   IconButton,
@@ -11,10 +11,16 @@ import { HamburgerIcon, WarningTwoIcon } from "@chakra-ui/icons";
 import SelectionDrawer from "./components/SelectionDrawer";
 import { useActiveModules } from "./hooks/useActiveModules";
 import { mapModuleIdToComponent } from "./lib/util";
+import { stopRobot } from "lib/apiManager";
 
 function App() {
   const { activeModulesState } = useActiveModules();
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const onStop = async () => {
+    const response = await stopRobot();
+    console.log("Response from robot stopped", response);
+  };
 
   return (
     <ChakraProvider>
@@ -37,6 +43,7 @@ function App() {
         size="lg"
         colorScheme="red"
         icon={<WarningTwoIcon />}
+        onClick={onStop}
         style={{ zIndex: 200 }}
       />
       <Wrap p="6">
