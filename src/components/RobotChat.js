@@ -1,14 +1,14 @@
-import 'react-chatbox-component/dist/style.css';
-import {ChatBox} from 'react-chatbox-component';
+import "react-chatbox-component/dist/style.css";
+import { ChatBox } from "react-chatbox-component";
 import React, { useState, useEffect } from "react";
-import { Box } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 
 import { socket } from "../services/socketConnection";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 const user = {
-  "uid" : "admin"
-}
+  uid: "admin",
+};
 
 const robotChatLocalStorageKey = "robotMessages";
 
@@ -29,7 +29,7 @@ function setLocalStorageRobotChat(messages) {
 }
 
 function messageExists(messageId, messages) {
-  return messages.find(message => message.id === messageId) != undefined; 
+  return messages.find((message) => message.id === messageId) != undefined;
 }
 
 export default function RobotChat() {
@@ -37,12 +37,12 @@ export default function RobotChat() {
 
   function sendMessage(message) {
     const newMessage = {
-      "text": message,
-      "id": uuidv4(),
-      "sender": {
-        "uid": user.uid,
-        "avatar": "https://img.icons8.com/cotton/2x/gender-neutral-user--v2.png"
-      }
+      text: message,
+      id: uuidv4(),
+      sender: {
+        uid: user.uid,
+        avatar: "https://img.icons8.com/cotton/2x/gender-neutral-user--v2.png",
+      },
     };
 
     // TODO: Add post to python API that communicates with ROS Node
@@ -67,9 +67,9 @@ export default function RobotChat() {
 
   return (
     <Box borderRadius="lg" p="4" shadow="lg" w="600px">
-      <div className='chat-header'>
-        <h5>React Chat Box Example</h5>
-      </div>
+      <Text fontSize="2xl" mb="4">
+        Robot messages
+      </Text>
       <ChatBox messages={storedMessages} user={user} onSubmit={sendMessage} />
     </Box>
   );
