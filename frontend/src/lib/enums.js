@@ -13,5 +13,10 @@ export const RobotModule = {
   OBJECT_RECOGNITION: "object_recognition",
   PERSON_RECOGNITION: "person_recognition",
   MECHANISM_CONTROL: "mechanism_control",
-  MAIN_ENGINE: "main_enginer",
+  MAIN_ENGINE: "main_engine",
+};
+
+export const SocketChannels = {
+  SYSTEM_HEALTH: "SystemHealth",
+  ACTIVE_MODULES: "ActiveModules",
 };
