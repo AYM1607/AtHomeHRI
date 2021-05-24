@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Drawer,
   DrawerOverlay,
@@ -14,6 +14,7 @@ import {
 
 import { useActiveModules } from "../hooks/useActiveModules";
 import { mapModuleIdToName } from "../lib/util";
+import ConfigSelectionForm from "./ConfigSelectionForm";
 
 export default function SelectionDrawer({ isOpen, onClose }) {
   const { activeModulesState, toggleModuleState } = useActiveModules();
@@ -26,6 +27,7 @@ export default function SelectionDrawer({ isOpen, onClose }) {
           <DrawerHeader>Modulos activos</DrawerHeader>
           <DrawerBody>
             <Stack direction="column">
+              <ConfigSelectionForm/>
               {Object.keys(activeModulesState).map((moduleId) => (
                 <Checkbox
                   key={moduleId}
