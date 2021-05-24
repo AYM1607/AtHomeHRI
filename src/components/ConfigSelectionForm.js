@@ -1,7 +1,5 @@
 import {
   Button,
-  Divider,
-  Select,
   Stack,
   useDisclosure,
   Menu,
@@ -12,7 +10,6 @@ import {
 } from "@chakra-ui/react";
 import { ChevronDownIcon } from '@chakra-ui/icons'
 import NewConfigModal from "./NewConfigModal";
-import { useState } from 'react';
 import { getLocalStorageConfigs, storeConfig } from "../lib/util";
 import { useActiveModules } from "../hooks/useActiveModules";
 
