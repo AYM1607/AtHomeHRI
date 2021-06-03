@@ -29,7 +29,7 @@ function setLocalStorageRobotChat(messages) {
 }
 
 function messageExists(messageId, messages) {
-  return messages.find((message) => message.id === messageId) != undefined;
+  return messages.find((message) => message.id === messageId) !== undefined;
 }
 
 export default function RobotChat() {

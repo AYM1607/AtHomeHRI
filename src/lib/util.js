@@ -63,3 +63,27 @@ export function mapRobotModuleToName(robotModule) {
       return "Unknown module";
   }
 }
+
+const configLocalStorageKey = "configs";
+
+export function getLocalStorageConfigs() {
+  let configs = {};
+  const storedConfigs = window.localStorage.getItem(configLocalStorageKey);
+
+  if (storedConfigs != null) {
+    configs = JSON.parse(storedConfigs);
+  }
+
+  return configs;
+}
+
+export function storeConfig(configName, modules) {
+  let configs = getLocalStorageConfigs();
+  configs[configName] = {
+    name: configName,
+    modules: modules
+  };
+
+  const configsJSONString = JSON.stringify(configs);
+  window.localStorage.setItem(configLocalStorageKey, configsJSONString);
+}
